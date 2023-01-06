@@ -18,21 +18,19 @@ public class Category {
 
     private String name;
 
+    // 다대다 관계는 왠만하면 사용하지 말자, 중간 테이블 수정 불가해서 유지보수 힘들어짐
     @ManyToMany
     @JoinTable(name = "category_item",
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    // 셀프 연관관계 세팅
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
 
-    public void addChildCategory(Category child) {
-        this.child.add(child);
-        child.setParent(this);
-    }
 }

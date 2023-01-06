@@ -23,6 +23,6 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
-    @ManyToMany(mappedBy = "items") // 되도록 쓰지 말자
+    @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 }
