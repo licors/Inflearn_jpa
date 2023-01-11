@@ -1,16 +1,16 @@
-#spring:
-#  datasource:
-#    url: jdbc:h2:mem:test  #메모리db
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#        format_sql: true
+spring:
+  datasource:
+    url: jdbc:h2:mem:test  #메모리db
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
 
 # db에 대해 아무것도 설정이 없는 경우 자동으로 메모리DB 동작됨.
 
