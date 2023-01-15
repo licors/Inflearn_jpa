@@ -2,6 +2,7 @@ package jpastudy.jpashop.domain;
 
 import jpastudy.jpashop.domain.item.Item;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import static javax.persistence.FetchType.*;
 @Entity
 @Table(name = "order_item")
 @Getter @Setter
+@NoArgsConstructor
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -27,4 +29,31 @@ public class OrderItem {
 
     private int orderPrice; // 주문 당시 가격
     private int count;
+
+    /**
+     * 생성메서드
+     */
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    /**
+     * 비지니스 로직
+     */
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
+
+
+
 }
