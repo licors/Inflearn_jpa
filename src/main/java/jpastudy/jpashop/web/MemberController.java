@@ -2,6 +2,7 @@ package jpastudy.jpashop.web;
 
 import jpastudy.jpashop.domain.Address;
 import jpastudy.jpashop.domain.Member;
+import jpastudy.jpashop.form.MemberForm;
 import jpastudy.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

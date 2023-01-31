@@ -1,7 +1,13 @@
 package jpastudy.jpashop.web;
 
+import jpastudy.jpashop.domain.item.Album;
 import jpastudy.jpashop.domain.item.Book;
 import jpastudy.jpashop.domain.item.Item;
+import jpastudy.jpashop.domain.item.Movie;
+import jpastudy.jpashop.form.AlbumForm;
+import jpastudy.jpashop.form.BookForm;
+import jpastudy.jpashop.form.ItemForm;
+import jpastudy.jpashop.form.MovieForm;
 import jpastudy.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,24 +25,69 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping(value = "/items/new")
-    public String createForm(Model model) {
+    @GetMapping(value = "/items/book/new")
+    public String createBookForm(Model model) {
 
         model.addAttribute("form", new BookForm());
-        return "items/createItemForm";
+        return "items/createBookForm";
     }
 
-    @PostMapping(value = "/items/new")
-    public String create(BookForm form) {
+    @PostMapping(value = "/items/book/new")
+    public String createBook(BookForm bookForm) {
 
         Book book = new Book();
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        book.create(
+                bookForm.getName(),
+                bookForm.getPrice(),
+                bookForm.getStockQuantity(),
+                bookForm.getAuthor(),
+                bookForm.getIsbn());
 
         itemService.saveItem(book);
+        return "redirect:/items";
+    }
+
+    @GetMapping(value = "/items/album/new")
+    public String createAlbumForm(Model model) {
+
+        model.addAttribute("form", new AlbumForm());
+        return "items/createAlbumForm";
+    }
+
+    @PostMapping(value = "/items/album/new")
+    public String createAlbum(AlbumForm albumForm) {
+
+        Album album = new Album();
+        album.create(
+                albumForm.getName(),
+                albumForm.getPrice(),
+                albumForm.getStockQuantity(),
+                albumForm.getArtist(),
+                albumForm.getEtc());
+
+        itemService.saveItem(album);
+        return "redirect:/items";
+    }
+
+    @GetMapping(value = "/items/movie/new")
+    public String createMovieForm(Model model) {
+
+        model.addAttribute("form", new MovieForm());
+        return "items/createMovieForm";
+    }
+
+    @PostMapping(value = "/items/movie/new")
+    public String createMovie(MovieForm movieForm) {
+
+        Movie movie = new Movie();
+        movie.create(
+                movieForm.getName(),
+                movieForm.getPrice(),
+                movieForm.getStockQuantity(),
+                movieForm.getDirector(),
+                movieForm.getActor());
+
+        itemService.saveItem(movie);
         return "redirect:/items";
     }
 
@@ -51,17 +102,15 @@ public class ItemController {
     @GetMapping(value = "/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
 
-        Book item = (Book) itemService.findOne(itemId);
+        Item item = itemService.findOne(itemId);
+        ItemForm itemForm = new ItemForm();
+        itemForm.createItemForm(
+                item.getId(),
+                item.getName(),
+                item.getPrice(),
+                item.getStockQuantity());
 
-        BookForm form = new BookForm();
-        form.setId(item.getId());
-        form.setName(item.getName());
-        form.setPrice(item.getPrice());
-        form.setStockQuantity(item.getStockQuantity());
-        form.setAuthor(item.getAuthor());
-        form.setIsbn(item.getIsbn());
-
-        model.addAttribute("form", form);
+        model.addAttribute("form", itemForm);
         return "items/updateItemForm";
     }
 

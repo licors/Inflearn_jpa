@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.Embeddable;
 
 @Embeddable //여기와 멤버에서 둘 중에 하나만 선언해도 되지만 보통 2군데 다 작상
-@Getter @Setter
+@Getter
 public class Address {
 
     private String city;

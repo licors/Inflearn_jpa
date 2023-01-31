@@ -1,4 +1,4 @@
-package jpastudy.jpashop.web;
+package jpastudy.jpashop.form;
 
 import lombok.Getter;
 import lombok.Setter;
