@@ -14,11 +14,12 @@ public class Album extends Item{
     private String artist;
     private String etc;
 
-    public void create(String name, int price, int stockQuantity, String artist, String etc) {
+    public Album setAllData(String name, int price, int stockQuantity, String artist, String etc) {
         this.setName(name);
         this.setPrice(price);
         this.setStockQuantity(stockQuantity);
         this.artist = artist;
         this.etc = etc;
+        return this;
     }
 }

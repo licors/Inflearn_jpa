@@ -1,6 +1,9 @@
 package jpastudy.jpashop.service;
 
+import jpastudy.jpashop.domain.item.Album;
+import jpastudy.jpashop.domain.item.Book;
 import jpastudy.jpashop.domain.item.Item;
+import jpastudy.jpashop.domain.item.Movie;
 import jpastudy.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,9 +33,29 @@ public class ItemService {
 
     @Transactional
     public void updateItem(Long id, String name, int price, int stockQuantity) {
-        Item item = itemRepository.findOne(id);
-        item.setName(name);
-        item.setPrice(price);
-        item.setStockQuantity(stockQuantity);
+        Item findItem = itemRepository.findOne(id);
+        // 업데이트 시 영속성인 상태에서 바꾸면 jpa 에서 감지해서 커밋시 반영해준다.
+        findItem.change(name, price, stockQuantity);
+    }
+
+    @Transactional
+    public Book updateBook(Long id, Book param) {
+        Book findBook = (Book) itemRepository.findOne(id);
+        findBook.setAllData(param.getName(), param.getPrice(), param.getStockQuantity(), param.getAuthor(), param.getIsbn());
+        return findBook;
+    }
+
+    @Transactional
+    public Album updateAlbum(Long id, Album param) {
+        Album findAlbum = (Album) itemRepository.findOne(id);
+        findAlbum.setAllData(param.getName(), param.getPrice(), param.getStockQuantity(), param.getArtist(), param.getEtc());
+        return findAlbum;
+    }
+
+    @Transactional
+    public Movie updateMovie(Long id, Movie param) {
+        Movie findMovie = (Movie) itemRepository.findOne(id);
+        findMovie.setAllData(param.getName(), param.getPrice(), param.getStockQuantity(), param.getDirector(), param.getActor());
+        return findMovie;
     }
 }

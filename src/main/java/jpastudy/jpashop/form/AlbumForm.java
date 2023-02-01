@@ -13,13 +13,13 @@ public class AlbumForm {
     private int stockQuantity;
     private String artist;
     private String etc;
-//
-//    public void createAlbumForm(Long id, String name, int price, int stockQuantity, String artist, String etc){
-//        this.id = id;
-//        this.name = name;
-//        this.price = price;
-//        this.stockQuantity = stockQuantity;
-//        this.artist = artist;
-//        this.etc = etc;
-//    }
+
+    public void createAlbumForm(Long id, String name, int price, int stockQuantity, String artist, String etc){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.artist = artist;
+        this.etc = etc;
+    }
 }

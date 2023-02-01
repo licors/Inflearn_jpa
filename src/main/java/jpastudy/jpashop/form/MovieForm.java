@@ -14,12 +14,12 @@ public class MovieForm {
     private String director;
     private String actor;
 
-//    public void createMovieForm(Long id, String name, int price, int stockQuantity, String director, String actor){
-//        this.id = id;
-//        this.name = name;
-//        this.price = price;
-//        this.stockQuantity = stockQuantity;
-//        this.director = director;
-//        this.actor = actor;
-//    }
+    public void createMovieForm(Long id, String name, int price, int stockQuantity, String director, String actor){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.director = director;
+        this.actor = actor;
+    }
 }
